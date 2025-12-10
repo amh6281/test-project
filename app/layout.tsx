@@ -16,9 +16,9 @@ export default function RootLayout({
   return (
     <html lang='ko'>
       <body className='antialiased'>
-        <div className='min-h-screen bg-slate-50 text-slate-900'>
+        <div className='flex min-h-screen flex-col bg-slate-50 text-slate-900'>
           <Header />
-          <main className='mx-auto flex w-full max-w-4xl flex-1 flex-col gap-6 px-4 py-8 sm:px-6 lg:px-8'>
+          <main className='mx-auto flex w-full max-w-4xl flex-1 flex-col gap-6 px-4 py-8'>
             {children}
           </main>
           <Footer />
