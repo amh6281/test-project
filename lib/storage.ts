@@ -1,4 +1,4 @@
-import { MonthSummary, StorageShape } from '@/types';
+import { MonthSummary, StorageShape, SummaryPair } from '@/types';
 
 const STORAGE_KEY = 'moneysnap:storage:v1';
 
@@ -56,4 +56,17 @@ export const getLastMonthSummary = (): MonthSummary | undefined => {
 export const getAllSummaries = (): MonthSummary[] => {
   const { summaries } = readStorage();
   return summaries;
+};
+
+// 최신 및 이전 요약 데이터 조회
+export const loadSummaries = (): SummaryPair => {
+  const summaries = getAllSummaries();
+  if (!summaries.length) {
+    return { latestSummary: null, previousSummary: null };
+  }
+  const sorted = [...summaries].sort((a, b) => b.month.localeCompare(a.month));
+  return {
+    latestSummary: sorted[0] ?? null,
+    previousSummary: sorted[1] ?? null,
+  };
 };
