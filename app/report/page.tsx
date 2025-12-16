@@ -17,7 +17,7 @@ const ReportPage = async ({ searchParams }: ReportPageProps) => {
       />
 
       {/* 리포트 카드 영역 (캡처 대상) */}
-      {/* <ReportCard /> */}
+      <ReportCard />
 
       {/* 액션 버튼 */}
       <ReportActions />
