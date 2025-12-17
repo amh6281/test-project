@@ -56,7 +56,7 @@ const NumberInput = ({
         {error && <span className='text-danger text-xs'>{error}</span>}
       </div>
       <div
-        className={`focus-within:border-primary-300 focus-within:ring-primary-200 flex items-center justify-between rounded-xl border bg-white px-3 py-2 shadow-sm transition focus-within:ring-2 ${error ? 'border-danger ring-danger/30' : 'border-slate-200'}`}
+        className={`focus-within:border-primary-300 focus-within:ring-primary-200 flex min-h-[44px] items-center justify-between rounded-xl border bg-white px-3 py-3 shadow-sm transition focus-within:ring-2 ${error ? 'border-danger ring-danger/30' : 'border-slate-200'}`}
       >
         <input
           type='text'
