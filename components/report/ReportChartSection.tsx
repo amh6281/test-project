@@ -1,5 +1,6 @@
 'use client';
 
+import { useMemo } from 'react';
 import { ArcElement, Chart, Legend, Tooltip, type TooltipItem } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import type { MonthSummary } from '@/types';
@@ -14,41 +15,49 @@ const ReportChartSection = ({ summary }: ReportChartSectionProps) => {
   const { cash, investment, debt } = summary;
 
   // 차트 데이터 계산
-  const chartTotal =
-    Math.max(0, cash) + Math.max(0, investment) + Math.max(0, debt);
+  const chartTotal = useMemo(
+    () => Math.max(0, cash) + Math.max(0, investment) + Math.max(0, debt),
+    [cash, investment, debt],
+  );
 
-  const chartData = {
-    labels: ['현금', '투자', '부채'],
-    datasets: [
-      {
-        label: '자산 구성',
-        data: [cash, investment, debt],
-        backgroundColor: ['#10b981', '#3b82f6', '#ef4444'],
-        borderWidth: 0,
-      },
-    ],
-  };
+  const chartData = useMemo(
+    () => ({
+      labels: ['현금', '투자', '부채'],
+      datasets: [
+        {
+          label: '자산 구성',
+          data: [cash, investment, debt],
+          backgroundColor: ['#10b981', '#3b82f6', '#ef4444'],
+          borderWidth: 0,
+        },
+      ],
+    }),
+    [cash, investment, debt],
+  );
 
-  const chartOptions = {
-    responsive: true,
-    maintainAspectRatio: false,
-    plugins: {
-      legend: {
-        position: 'bottom' as const,
-        labels: { boxWidth: 14, boxHeight: 14, padding: 12 },
-      },
-      tooltip: {
-        callbacks: {
-          label: (context: TooltipItem<'doughnut'>) => {
-            const value = Number(context.raw ?? 0);
-            const percent = chartTotal > 0 ? (value / chartTotal) * 100 : 0;
-            return `${context.label}: ${value.toLocaleString('ko-KR')}원 (${percent.toFixed(1)}%)`;
+  const chartOptions = useMemo(
+    () => ({
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: {
+          position: 'bottom' as const,
+          labels: { boxWidth: 14, boxHeight: 14, padding: 12 },
+        },
+        tooltip: {
+          callbacks: {
+            label: (context: TooltipItem<'doughnut'>) => {
+              const value = Number(context.raw ?? 0);
+              const percent = chartTotal > 0 ? (value / chartTotal) * 100 : 0;
+              return `${context.label}: ${value.toLocaleString('ko-KR')}원 (${percent.toFixed(1)}%)`;
+            },
           },
         },
       },
-    },
-    cutout: '70%',
-  };
+      cutout: '70%',
+    }),
+    [chartTotal],
+  );
 
   if (chartTotal === 0) {
     return (

@@ -1,3 +1,6 @@
+'use client';
+
+import { useMemo } from 'react';
 import { formatCurrency, formatPercent } from '@/lib/formatters';
 import { calculateDelta } from '@/lib/calculations';
 import type { MonthSummary } from '@/types';
@@ -14,8 +17,10 @@ const ReportSummarySection = ({
   const { netAssets, savingAmount, savingRate } = summary;
 
   // 지난달 대비 순자산 증감 계산
-  const { delta: netAssetsDelta, deltaRate: netAssetsDeltaRate } =
-    calculateDelta(netAssets, previousSummary?.netAssets);
+  const { delta: netAssetsDelta, deltaRate: netAssetsDeltaRate } = useMemo(
+    () => calculateDelta(netAssets, previousSummary?.netAssets),
+    [netAssets, previousSummary?.netAssets],
+  );
 
   // 델타 뱃지 스타일
   const isPositive = netAssetsDelta > 0;
@@ -30,11 +35,14 @@ const ReportSummarySection = ({
   const deltaIcon = isPositive ? '▲' : isNegative ? '▼' : '●';
 
   // 핵심 지표 데이터
-  const summaryItems = [
-    { label: '순자산', value: formatCurrency(netAssets) },
-    { label: '저축액', value: formatCurrency(savingAmount) },
-    { label: '저축률', value: formatPercent(savingRate, 0) },
-  ];
+  const summaryItems = useMemo(
+    () => [
+      { label: '순자산', value: formatCurrency(netAssets) },
+      { label: '저축액', value: formatCurrency(savingAmount) },
+      { label: '저축률', value: formatPercent(savingRate, 0) },
+    ],
+    [netAssets, savingAmount, savingRate],
+  );
 
   return (
     <div className='space-y-4'>

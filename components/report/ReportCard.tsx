@@ -1,9 +1,9 @@
 'use client';
 
+import { useEffect, useState, useMemo } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Card } from '../common';
-import { useEffect, useState } from 'react';
-import { MonthSummary } from '@/types';
+import type { MonthSummary } from '@/types';
 import { formatMonth } from '@/lib/formatters';
 import { getAllSummaries, getMonthSummary } from '@/lib/storage';
 import ReportSummarySection from './ReportSummarySection';
@@ -17,19 +17,17 @@ const ReportCard = () => {
   const [previousSummary, setPreviousSummary] = useState<MonthSummary | null>(
     null,
   );
-
   const [isLoading, setIsLoading] = useState(true);
 
+  const monthParam = useMemo(() => searchParams.get('month'), [searchParams]);
+
   useEffect(() => {
-    // 월 파라미터 가져오기
-    const month = searchParams.get('month');
-    if (!month) {
+    if (!monthParam) {
       router.push('/');
       return;
     }
 
-    const normalizedMonth = formatMonth(month);
-    // 월 요약 데이터 가져오기
+    const normalizedMonth = formatMonth(monthParam);
     const found = getMonthSummary(normalizedMonth);
 
     if (!found) {
@@ -47,18 +45,22 @@ const ReportCard = () => {
     setSummary(found);
     setPreviousSummary(sorted[0] ?? null);
     setIsLoading(false);
-  }, [searchParams, router]);
+  }, [monthParam, router]);
 
   if (isLoading || !summary) {
     return (
-      <div className='flex min-h-[400px] items-center justify-center'>
+      <div
+        className='flex min-h-[400px] items-center justify-center'
+        role='status'
+        aria-live='polite'
+      >
         <p className='text-slate-500'>로딩 중...</p>
       </div>
     );
   }
 
   return (
-    <div id='report-card' className='space-y-6'>
+    <div id='report-card' className='space-y-6' role='article'>
       <Card className='space-y-6 p-6 sm:p-8'>
         {/* 핵심 지표 */}
         <ReportSummarySection
