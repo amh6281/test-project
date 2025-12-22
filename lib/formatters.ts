@@ -1,10 +1,9 @@
-// 금액을 원화 통화 형식(콤마, '원')으로 포맷
-export const formatCurrency = (value: number): string => {
-  return new Intl.NumberFormat('ko-KR', {
-    style: 'currency',
-    currency: 'KRW',
+// 금액을 천 단위 콤마 형식으로 포맷 (원 표시 없음)
+export const formatCurrency = (value: number, includeWon: boolean = true): string => {
+  const formatted = new Intl.NumberFormat('ko-KR', {
     maximumFractionDigits: 0,
   }).format(value ?? 0);
+  return includeWon ? `${formatted}원` : formatted;
 };
 
 // 소수 입력 비율을 퍼센트 문자열로 변환 (예: 0.32 -> "32%")
@@ -25,4 +24,11 @@ export const formatMonth = (value: string | Date): string => {
   const year = value.getFullYear();
   const month = value.getMonth() + 1;
   return `${year.toString().padStart(4, '0')}-${month.toString().padStart(2, '0')}`;
+};
+
+// 'YYYY-MM' 형식을 'YYYY년 MM월' 형식으로 변환
+export const formatMonthKorean = (month: string): string => {
+  const [year, monthNum] = month.split('-');
+  if (!year || !monthNum) return month;
+  return `${year}년 ${parseInt(monthNum, 10)}월`;
 };
