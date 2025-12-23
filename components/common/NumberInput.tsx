@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState, type ChangeEvent } from 'react';
 
 interface NumberInputProps {
   label: string;
@@ -53,7 +53,11 @@ const NumberInput = ({
           {label}
           {required && <span className='text-primary-600 ml-1'>*</span>}
         </span>
-        {error && <span className='text-danger text-xs'>{error}</span>}
+        {error && (
+          <span id={`${label}-error`} className='text-danger text-xs' role='alert'>
+            {error}
+          </span>
+        )}
       </div>
       <div
         className={`focus-within:border-primary-300 focus-within:ring-primary-200 flex min-h-[44px] items-center justify-between rounded-xl border bg-white px-3 py-3 shadow-sm transition focus-within:ring-2 ${error ? 'border-danger ring-danger/30' : 'border-slate-200'}`}
@@ -63,9 +67,12 @@ const NumberInput = ({
           inputMode='numeric'
           placeholder={placeholder}
           value={display}
-          onChange={(e) => handleChange(e.target.value)}
+          onChange={(e: ChangeEvent<HTMLInputElement>) => handleChange(e.target.value)}
           onBlur={handleBlur}
           className='w-full bg-transparent pr-2 text-base text-slate-900 outline-none placeholder:text-slate-400'
+          aria-label={label}
+          aria-invalid={error ? 'true' : 'false'}
+          aria-describedby={error ? `${label}-error` : undefined}
         />
         {suffix && (
           <span className='text-sm font-medium text-slate-500'>{suffix}</span>

@@ -30,9 +30,11 @@ const HomeForm = () => {
   });
 
   useEffect(() => {
+    const currentMonth = formatMonth(new Date());
+    const loadedSummaries = loadSummaries();
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMonth(formatMonth(new Date()));
-    setSummaries(loadSummaries());
+    setMonth(currentMonth);
+    setSummaries(loadedSummaries);
   }, []);
 
   const { latestSummary, previousSummary } = summaries;
@@ -102,6 +104,7 @@ const HomeForm = () => {
           <button
             type='submit'
             className='bg-primary-500 hover:bg-primary-600 focus:ring-primary-200 w-full rounded-full px-5 py-3 text-center text-base font-semibold text-white shadow-sm transition focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto'
+            aria-label='이번 달 리포트 만들기'
           >
             이번 달 리포트 만들기
           </button>

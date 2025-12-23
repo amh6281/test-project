@@ -1,6 +1,6 @@
 import { NumberInput } from '@/components/common';
 
-type HomeAmountInputsProps = {
+interface HomeAmountInputsProps {
   cash: number;
   investment: number;
   debt: number;
@@ -14,7 +14,7 @@ type HomeAmountInputsProps = {
   assetError?: string;
   incomeError?: string;
   expenseError?: string;
-};
+}
 
 const HomeAmountInputs = ({
   cash,

@@ -1,23 +1,40 @@
-type HomeMonthInputProps = {
+import type { ChangeEvent } from 'react';
+
+interface HomeMonthInputProps {
   month: string;
   error?: string;
   onChange: (next: string) => void;
-};
+}
 
 const HomeMonthInput = ({ month, error, onChange }: HomeMonthInputProps) => {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    onChange(e.target.value);
+  };
+
   return (
-    <div className='flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between'>
-      <label className='text-sm font-medium text-slate-800'>
-        기준 월
+    <label className='flex w-full flex-col gap-2'>
+      <div className='flex items-center justify-between'>
+        <span className='text-sm font-medium text-slate-800'>
+          기준 월
+          <span className='text-primary-600 ml-1'>*</span>
+        </span>
+        {error && <span className='text-danger text-xs'>{error}</span>}
+      </div>
+      <div
+        className={`focus-within:border-primary-300 focus-within:ring-primary-200 flex min-h-[44px] items-center rounded-xl border bg-white px-3 py-2 shadow-sm transition focus-within:ring-2 ${error ? 'border-danger ring-danger/30' : 'border-slate-200'}`}
+      >
         <input
           type='month'
           value={month}
-          onChange={(e) => onChange(e.target.value)}
-          className={`focus:border-primary-300 focus:ring-primary-200 mt-2 w-full rounded-xl border bg-white px-3 py-2 text-base text-slate-900 shadow-sm focus:ring-2 focus:outline-none ${error ? 'border-danger ring-danger/30' : 'border-slate-200'}`}
+          onChange={handleChange}
+          className='w-full bg-transparent text-base text-slate-900 outline-none'
+          aria-label='기준 월 선택'
+          aria-invalid={error ? 'true' : 'false'}
+          aria-describedby={error ? 'month-error' : undefined}
         />
-      </label>
-      {error && <span className='text-danger text-sm'>{error}</span>}
-    </div>
+        {error && <span id='month-error' className='sr-only'>{error}</span>}
+      </div>
+    </label>
   );
 };
 

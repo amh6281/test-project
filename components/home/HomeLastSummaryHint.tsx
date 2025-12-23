@@ -1,13 +1,12 @@
 import { useMemo } from 'react';
-
 import { calculateDelta } from '@/lib/calculations';
 import { formatCurrency, formatPercent } from '@/lib/formatters';
 import type { MonthSummary } from '@/types';
 
-type HomeLastSummaryHintProps = {
+interface HomeLastSummaryHintProps {
   latestSummary: MonthSummary | null;
   previousSummary: MonthSummary | null;
-};
+}
 
 const HomeLastSummaryHint = ({
   latestSummary,
