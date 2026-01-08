@@ -6,6 +6,7 @@ import { Card } from '../common';
 import type { MonthSummary } from '@/types';
 import { formatMonth } from '@/lib/formatters';
 import { getAllSummaries, getMonthSummary } from '@/lib/storage';
+import { getPreviousSummaries } from '@/lib/utils';
 import ReportSummarySection from './ReportSummarySection';
 import ReportChartSection from './ReportChartSection';
 import ReportCommentSection from './ReportCommentSection';
@@ -37,13 +38,13 @@ const ReportCard = () => {
 
     // 이전 달 데이터 찾기 (같은 월이 아닌 가장 가까운 이전 월)
     const allSummaries = getAllSummaries();
-    const sorted = [...allSummaries]
-      .filter((s) => s.month < normalizedMonth)
-      .sort((a, b) => b.month.localeCompare(a.month));
-
+    const previousSummaries = getPreviousSummaries(
+      allSummaries,
+      normalizedMonth,
+    );
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setSummary(found);
-    setPreviousSummary(sorted[0] ?? null);
+    setPreviousSummary(previousSummaries[0] ?? null);
     setIsLoading(false);
   }, [monthParam, router]);
 

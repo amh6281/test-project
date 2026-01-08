@@ -14,12 +14,8 @@ const HistoryList = () => {
 
   useEffect(() => {
     const allSummaries = getAllSummaries();
-    // 최신순 정렬
-    const sorted = [...allSummaries].sort((a, b) =>
-      b.month.localeCompare(a.month),
-    );
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    setSummaries(sorted);
+    setSummaries(allSummaries);
   }, []);
 
   const handleItemClick = (month: string) => {
