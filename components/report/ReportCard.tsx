@@ -5,11 +5,16 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { Card } from '../common';
 import type { MonthSummary } from '@/types';
 import { formatMonth } from '@/lib/formatters';
-import { getAllSummaries, getMonthSummary } from '@/lib/storage';
+import {
+  getAllSummaries,
+  getMonthSummary,
+  getGoalNetAssets,
+} from '@/lib/storage';
 import { getPreviousSummaries } from '@/lib/utils';
 import ReportSummarySection from './ReportSummarySection';
 import ReportChartSection from './ReportChartSection';
 import ReportCommentSection from './ReportCommentSection';
+import GoalProgressBar from './GoalProgressBar';
 
 const ReportCard = () => {
   const router = useRouter();
@@ -17,6 +22,9 @@ const ReportCard = () => {
   const [summary, setSummary] = useState<MonthSummary | null>(null);
   const [previousSummary, setPreviousSummary] = useState<MonthSummary | null>(
     null,
+  );
+  const [goalNetAssets, setGoalNetAssets] = useState<number | undefined>(
+    undefined,
   );
   const [isLoading, setIsLoading] = useState(true);
 
@@ -45,6 +53,7 @@ const ReportCard = () => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setSummary(found);
     setPreviousSummary(previousSummaries[0] ?? null);
+    setGoalNetAssets(getGoalNetAssets());
     setIsLoading(false);
   }, [monthParam, router]);
 
@@ -68,6 +77,13 @@ const ReportCard = () => {
           summary={summary}
           previousSummary={previousSummary}
         />
+        {/* 목표 진행률 */}
+        {goalNetAssets && (
+          <GoalProgressBar
+            currentNetAssets={summary.netAssets}
+            goalNetAssets={goalNetAssets}
+          />
+        )}
         {/* 차트 */}
         <ReportChartSection summary={summary} />
         {/* 코멘트 */}

@@ -42,7 +42,7 @@ export const saveMonthSummary = (summary: MonthSummary): MonthSummary => {
     (item) => item.month !== summary.month,
   );
   const next = sortSummariesByMonthDesc([...filtered, summary]);
-  writeStorage({ summaries: next });
+  writeStorage({ summaries: next, goalNetAssets: current.goalNetAssets });
   return summary;
 };
 
@@ -83,4 +83,20 @@ export const loadSummaries = (): SummaryPair => {
     latestSummary: summaries[0] ?? null,
     previousSummary: summaries[1] ?? null,
   };
+};
+
+/**
+ * 목표 자산 저장
+ */
+export const saveGoalNetAssets = (goalNetAssets: number): void => {
+  const current = readStorage();
+  writeStorage({ ...current, goalNetAssets });
+};
+
+/**
+ * 목표 자산 조회
+ */
+export const getGoalNetAssets = (): number | undefined => {
+  const { goalNetAssets } = readStorage();
+  return goalNetAssets;
 };

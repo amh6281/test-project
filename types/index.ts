@@ -14,6 +14,7 @@ export type MonthSummary = {
 // 스토리지 데이터 구조
 export type StorageShape = {
   summaries: MonthSummary[];
+  goalNetAssets?: number;
 };
 
 // 필드 에러
