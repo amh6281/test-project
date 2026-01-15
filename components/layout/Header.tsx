@@ -15,7 +15,7 @@ const Header = () => {
             한 장 스냅샷으로 보는 내 돈 상태
           </p>
         </Link>
-        <nav className='flex items-center'>
+        <nav className='flex items-center gap-4'>
           <Link
             href='/history'
             className={`text-sm font-medium transition-colors ${
@@ -25,6 +25,16 @@ const Header = () => {
             }`}
           >
             히스토리
+          </Link>
+          <Link
+            href='/settings'
+            className={`text-sm font-medium transition-colors ${
+              pathname === '/settings'
+                ? 'text-primary-600'
+                : 'hover:text-primary-600 text-slate-600'
+            }`}
+          >
+            설정
           </Link>
         </nav>
       </div>
