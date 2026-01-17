@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Footer, Header } from '@/components/layout';
+import ThemeProvider from '@/components/layout/ThemeProvider';
 
 export const metadata: Metadata = {
   title: 'MoneySnap - 한 장 스냅샷으로 보는 내 돈 상태',
@@ -14,9 +15,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang='ko'>
+    <html lang='ko' suppressHydrationWarning>
       <body className='antialiased'>
-        <div className='flex min-h-screen flex-col bg-slate-50 text-slate-900'>
+        <ThemeProvider />
+        <div className='flex min-h-screen flex-col bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-50'>
           <Header />
           <main className='mx-auto flex w-full max-w-4xl flex-1 flex-col gap-6 px-4 py-8'>
             {children}
