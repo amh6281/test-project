@@ -68,6 +68,28 @@
   --color-border: var(--color-slate-200);
 }
 
+/* 다크 모드 */
+.dark {
+  --background: #0f172a;
+  --foreground: #f8fafc;
+
+  /* Neutrals (Slate 계열) - 다크 모드용 */
+  --color-slate-50: #1e293b;
+  --color-slate-100: #334155;
+  --color-slate-200: #475569;
+  --color-slate-300: #64748b;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #cbd5e1;
+  --color-slate-600: #e2e8f0;
+  --color-slate-700: #f1f5f9;
+  --color-slate-800: #f8fafc;
+  --color-slate-900: #ffffff;
+
+  /* Neutrals - 별칭 (다크 모드용) */
+  --color-surface: #1e293b;
+  --color-border: var(--color-slate-700);
+}
+
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
