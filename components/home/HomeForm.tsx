@@ -103,7 +103,7 @@ const HomeForm = () => {
           />
           <button
             type='submit'
-            className='bg-primary-500 hover:bg-primary-600 focus:ring-primary-200 w-full rounded-full px-5 py-3 text-center text-base font-semibold text-white shadow-sm transition focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto'
+            className='bg-primary-500 hover:bg-primary-600 focus:ring-primary-200 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-300 w-full rounded-full px-5 py-3 text-center text-base font-semibold text-white shadow-sm transition focus:ring-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto'
             aria-label='이번 달 리포트 만들기'
           >
             이번 달 리포트 만들기

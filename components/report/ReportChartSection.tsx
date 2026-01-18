@@ -61,15 +61,15 @@ const ReportChartSection = ({ summary }: ReportChartSectionProps) => {
 
   if (chartTotal === 0) {
     return (
-      <div className='flex h-64 items-center justify-center rounded-2xl border border-dashed border-slate-200 bg-white text-sm text-slate-500'>
+      <div className='flex h-64 items-center justify-center rounded-2xl border border-dashed border-slate-200 bg-white text-sm text-slate-500 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-400'>
         데이터가 없습니다. 금액을 입력하면 자산 구성이 표시돼요.
       </div>
     );
   }
 
   return (
-    <div className='relative h-72 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm'>
-      <p className='mb-4 text-base font-semibold text-slate-900'>
+    <div className='relative h-72 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-800'>
+      <p className='mb-4 text-base font-semibold text-slate-900 dark:text-slate-50'>
         자산 구성 비율
       </p>
       <div className='h-[220px]'>

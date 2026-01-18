@@ -49,7 +49,7 @@ const GoalSettingsForm = () => {
     return (
       <Card>
         <div className='flex min-h-[200px] items-center justify-center'>
-          <p className='text-slate-500'>로딩 중...</p>
+          <p className='text-slate-500 dark:text-slate-400'>로딩 중...</p>
         </div>
       </Card>
     );
@@ -61,17 +61,22 @@ const GoalSettingsForm = () => {
     <Card>
       <div className='space-y-6'>
         <div>
-          <h3 className='text-lg font-semibold text-slate-900'>목표 자산 설정</h3>
-          <p className='mt-1 text-sm text-slate-500'>
+          <h3 className='text-lg font-semibold text-slate-900 dark:text-slate-50'>
+            목표 자산 설정
+          </h3>
+          <p className='mt-1 text-sm text-slate-500 dark:text-slate-400'>
             달성하고 싶은 목표 순자산을 입력하세요. 리포트 페이지에서 진행
             상황을 확인할 수 있습니다.
           </p>
         </div>
 
         {currentGoal && (
-          <div className='rounded-lg bg-primary-50 p-4'>
-            <p className='text-sm text-slate-600'>
-              현재 목표: <span className='font-semibold text-primary-700'>{formatCurrency(currentGoal)}</span>
+          <div className='rounded-lg bg-primary-50 p-4 dark:bg-primary-900/30'>
+            <p className='text-sm text-slate-600 dark:text-slate-300'>
+              현재 목표:{' '}
+              <span className='font-semibold text-primary-700 dark:text-primary-400'>
+                {formatCurrency(currentGoal)}
+              </span>
             </p>
           </div>
         )}
@@ -111,7 +116,7 @@ const GoalSettingsForm = () => {
               <button
                 onClick={handleClear}
                 disabled={isSaving}
-                className='rounded-xl border border-slate-300 px-4 py-3 font-medium text-slate-700 transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50'
+                className='rounded-xl border border-slate-300 px-4 py-3 font-medium text-slate-700 transition-colors hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-slate-600 dark:text-slate-300 dark:hover:bg-slate-700'
               >
                 초기화
               </button>

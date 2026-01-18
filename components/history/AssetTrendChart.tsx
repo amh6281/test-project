@@ -137,10 +137,10 @@ const AssetTrendChart = () => {
   return (
     <Card>
       <div className='mb-4'>
-        <h3 className='text-lg font-semibold text-slate-900'>
+        <h3 className='text-lg font-semibold text-slate-900 dark:text-slate-50'>
           최근 6개월 자산 변화
         </h3>
-        <p className='mt-1 text-sm text-slate-500'>
+        <p className='mt-1 text-sm text-slate-500 dark:text-slate-400'>
           시간에 따른 순자산 추이를 확인해보세요.
         </p>
       </div>

@@ -13,8 +13,8 @@ const ReportCommentSection = ({
   const comment = useMemo(() => getComment(savingRate), [savingRate]);
 
   return (
-    <div className='rounded-xl border border-slate-200 bg-slate-50 p-5'>
-      <p className='text-center text-base leading-relaxed text-slate-700'>
+    <div className='rounded-xl border border-slate-200 bg-slate-50 p-5 dark:border-slate-700 dark:bg-slate-800/50'>
+      <p className='text-center text-base leading-relaxed text-slate-700 dark:text-slate-300'>
         {comment}
       </p>
     </div>

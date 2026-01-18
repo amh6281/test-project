@@ -28,10 +28,10 @@ const ReportSummarySection = ({
   const deltaBadgeBase =
     'inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm font-medium';
   const deltaBadgeTone = isPositive
-    ? 'bg-green-50 text-green-700'
+    ? 'bg-green-50 text-green-700 dark:bg-green-900/30 dark:text-green-400'
     : isNegative
-      ? 'bg-red-50 text-red-600'
-      : 'bg-slate-100 text-slate-700';
+      ? 'bg-red-50 text-red-600 dark:bg-red-900/30 dark:text-red-400'
+      : 'bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-300';
   const deltaIcon = isPositive ? '▲' : isNegative ? '▼' : '●';
 
   // 핵심 지표 데이터
@@ -47,12 +47,14 @@ const ReportSummarySection = ({
   return (
     <div className='space-y-4'>
       <div className='flex items-center justify-between'>
-        <h2 className='text-lg font-semibold text-slate-900'>핵심 지표</h2>
+        <h2 className='text-lg font-semibold text-slate-900 dark:text-slate-50'>
+          핵심 지표
+        </h2>
         {previousSummary && (
           <span className={`${deltaBadgeBase} ${deltaBadgeTone}`}>
             <span className='text-xs'>{deltaIcon}</span>
             <span>{formatCurrency(netAssetsDelta)}</span>
-            <span className='text-xs text-slate-500'>
+            <span className='text-xs text-slate-500 dark:text-slate-400'>
               {netAssetsDeltaRate ? formatPercent(netAssetsDeltaRate, 1) : '0%'}
             </span>
           </span>
@@ -62,10 +64,12 @@ const ReportSummarySection = ({
         {summaryItems.map((item) => (
           <div
             key={item.label}
-            className='rounded-2xl border border-slate-200 bg-white px-4 py-5 text-center shadow-sm'
+            className='rounded-2xl border border-slate-200 bg-white px-4 py-5 text-center shadow-sm dark:border-slate-700 dark:bg-slate-800'
           >
-            <p className='text-sm text-slate-500'>{item.label}</p>
-            <p className='mt-2 text-2xl font-semibold text-slate-900 sm:text-3xl'>
+            <p className='text-sm text-slate-500 dark:text-slate-400'>
+              {item.label}
+            </p>
+            <p className='mt-2 text-2xl font-semibold text-slate-900 dark:text-slate-50 sm:text-3xl'>
               {item.value}
             </p>
           </div>

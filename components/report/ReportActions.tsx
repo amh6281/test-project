@@ -53,7 +53,7 @@ const ReportActions = () => {
         <button
           type='button'
           onClick={() => router.push('/')}
-          className='border-primary-500 text-primary-600 hover:bg-primary-50 focus-visible:ring-primary-300 min-h-[44px] w-full rounded-full border-2 bg-white px-5 py-3 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 sm:w-auto'
+          className='border-primary-500 text-primary-600 hover:bg-primary-50 focus-visible:ring-primary-300 dark:border-primary-400 dark:text-primary-400 dark:hover:bg-primary-900/30 dark:focus-visible:ring-primary-300 min-h-[44px] w-full rounded-full border-2 bg-white px-5 py-3 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 dark:bg-slate-800 sm:w-auto'
           aria-label='다시 입력하기'
         >
           다시 입력하기
@@ -62,7 +62,7 @@ const ReportActions = () => {
           type='button'
           onClick={handleDownload}
           disabled={isSaving}
-          className='bg-primary-500 hover:bg-primary-600 focus-visible:ring-primary-300 min-h-[44px] w-full rounded-full px-5 py-3 text-sm font-semibold text-white shadow-sm transition focus:outline-none focus-visible:ring-2 disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto'
+          className='bg-primary-500 hover:bg-primary-600 focus-visible:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus-visible:ring-primary-300 min-h-[44px] w-full rounded-full px-5 py-3 text-sm font-semibold text-white shadow-sm transition focus:outline-none focus-visible:ring-2 disabled:cursor-not-allowed disabled:opacity-70 sm:w-auto'
           aria-label={isSaving ? '이미지 저장 중' : '리포트를 이미지로 저장'}
           aria-disabled={isSaving}
         >
