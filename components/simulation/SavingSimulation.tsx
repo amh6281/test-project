@@ -1,14 +1,22 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { getLastMonthSummary } from '@/lib/storage';
+import type { MonthSummary } from '@/types';
 import { CurrentStatus, SimulationSettings, SimulationResults, EmptyState } from './index';
 
 const SavingSimulation = () => {
   const [returnRate, setReturnRate] = useState<number>(5); // 연 수익률 (%)
   const [salaryGrowthRate, setSalaryGrowthRate] = useState<number>(3); // 연봉 상승률 (%)
+  const [latestSummary, setLatestSummary] = useState<MonthSummary | undefined>(undefined);
+  const [mounted, setMounted] = useState(false);
 
-  const latestSummary = getLastMonthSummary();
+  useEffect(() => {
+    const summary = getLastMonthSummary();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setLatestSummary(summary);
+    setMounted(true);
+  }, []);
 
   const simulationResults = useMemo(() => {
     if (!latestSummary) return null;
@@ -43,6 +51,18 @@ const SavingSimulation = () => {
       totalSaved3Years,
     };
   }, [latestSummary, returnRate, salaryGrowthRate]);
+
+  if (!mounted) {
+    return (
+      <div className='space-y-6'>
+        <div className='rounded-2xl border border-slate-200 bg-white p-4 shadow-sm sm:p-6'>
+          <div className='flex min-h-[200px] items-center justify-center'>
+            <p className='text-slate-500'>로딩 중...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   if (!latestSummary) {
     return <EmptyState />;
