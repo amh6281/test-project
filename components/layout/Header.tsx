@@ -30,6 +30,16 @@ const Header = () => {
             히스토리
           </Link>
           <Link
+            href='/simulation'
+            className={`text-sm font-medium transition-colors ${
+              pathname === '/simulation'
+                ? 'text-primary-600 dark:text-primary-400'
+                : 'hover:text-primary-600 text-slate-600 dark:text-slate-300 dark:hover:text-primary-400'
+            }`}
+          >
+            시뮬레이션
+          </Link>
+          <Link
             href='/settings'
             className={`text-sm font-medium transition-colors ${
               pathname === '/settings'
