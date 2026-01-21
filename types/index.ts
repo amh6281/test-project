@@ -9,6 +9,12 @@ export type MonthSummary = {
   netAssets: number; // 순자산 = cash + investment - debt
   savingAmount: number; // 저축액 = income - expense
   savingRate: number; // 저축률 = savingAmount / income
+  expenseBreakdown?: {
+    fixed: number; // 고정비 %
+    variable: number; // 변동비 %
+    saving: number; // 저축 %
+    investment: number; // 투자 %
+  };
 };
 
 // 스토리지 데이터 구조

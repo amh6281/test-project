@@ -1,4 +1,4 @@
-import { ReportActions, ReportCard } from '@/components/report';
+import { ReportActions, ReportCard, ExpenseBreakdownSection } from '@/components/report';
 import { PageIntro } from '@/components/common';
 import { formatMonthKorean } from '@/lib/formatters';
 
@@ -32,6 +32,9 @@ const ReportPage = async ({ searchParams }: ReportPageProps) => {
 
       {/* 리포트 카드 영역 (캡처 대상) */}
       <ReportCard />
+
+      {/* 소비 구조 비율 입력 */}
+      <ExpenseBreakdownSection />
 
       {/* 액션 버튼 */}
       <ReportActions />
