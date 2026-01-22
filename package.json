@@ -2,11 +2,18 @@
   "name": "moneysnap",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "deploy": "vercel --prod",
+    "deploy:preview": "vercel",
+    "deploy:local": "npm run build && npm run start"
   },
   "dependencies": {
     "chart.js": "^4.5.1",
