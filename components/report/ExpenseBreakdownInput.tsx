@@ -75,12 +75,22 @@ const ExpenseBreakdownInput = ({
     value: number,
     setter: (val: number) => void,
   ) => {
-    if (value < 0) {
+    // NaN이거나 빈 값인 경우 0으로 처리
+    if (isNaN(value) || value === null || value === undefined) {
       setter(0);
-    } else if (value > 100) {
+      setError('');
+      return;
+    }
+
+    // 앞의 0 제거를 위해 숫자로 변환
+    const normalizedValue = Number(value);
+
+    if (normalizedValue < 0) {
+      setter(0);
+    } else if (normalizedValue > 100) {
       setter(100);
     } else {
-      setter(value);
+      setter(normalizedValue);
     }
     setError('');
   };
@@ -103,10 +113,11 @@ const ExpenseBreakdownInput = ({
                 min='0'
                 max='100'
                 step='1'
-                value={fixed}
-                onChange={(e) =>
-                  handlePercentChange(Number(e.target.value), setFixed)
-                }
+                value={fixed || ''}
+                onChange={(e) => {
+                  const val = e.target.value === '' ? 0 : Number(e.target.value);
+                  handlePercentChange(val, setFixed);
+                }}
                 className='w-full bg-transparent pr-2 text-base text-slate-900 outline-none dark:text-slate-50'
                 placeholder='0'
               />
@@ -126,10 +137,11 @@ const ExpenseBreakdownInput = ({
                 min='0'
                 max='100'
                 step='1'
-                value={variable}
-                onChange={(e) =>
-                  handlePercentChange(Number(e.target.value), setVariable)
-                }
+                value={variable || ''}
+                onChange={(e) => {
+                  const val = e.target.value === '' ? 0 : Number(e.target.value);
+                  handlePercentChange(val, setVariable);
+                }}
                 className='w-full bg-transparent pr-2 text-base text-slate-900 outline-none dark:text-slate-50'
                 placeholder='0'
               />
@@ -149,10 +161,11 @@ const ExpenseBreakdownInput = ({
                 min='0'
                 max='100'
                 step='1'
-                value={saving}
-                onChange={(e) =>
-                  handlePercentChange(Number(e.target.value), setSaving)
-                }
+                value={saving || ''}
+                onChange={(e) => {
+                  const val = e.target.value === '' ? 0 : Number(e.target.value);
+                  handlePercentChange(val, setSaving);
+                }}
                 className='w-full bg-transparent pr-2 text-base text-slate-900 outline-none dark:text-slate-50'
                 placeholder='0'
               />
@@ -172,10 +185,11 @@ const ExpenseBreakdownInput = ({
                 min='0'
                 max='100'
                 step='1'
-                value={investment}
-                onChange={(e) =>
-                  handlePercentChange(Number(e.target.value), setInvestment)
-                }
+                value={investment || ''}
+                onChange={(e) => {
+                  const val = e.target.value === '' ? 0 : Number(e.target.value);
+                  handlePercentChange(val, setInvestment);
+                }}
                 className='w-full bg-transparent pr-2 text-base text-slate-900 outline-none dark:text-slate-50'
                 placeholder='0'
               />
