@@ -6,3 +6,4 @@ export { default as ReportCommentSection } from './ReportCommentSection';
 export { default as GoalProgressBar } from './GoalProgressBar';
 export { default as ExpenseBreakdownSection } from './ExpenseBreakdownSection';
 export { default as ExpenseBreakdownInput } from './ExpenseBreakdownInput';
+export { default as ExpenseBreakdownChart } from './ExpenseBreakdownChart';

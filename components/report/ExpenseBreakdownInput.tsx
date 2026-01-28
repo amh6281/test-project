@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import type { MonthSummary } from '@/types';
 import { saveMonthSummary } from '@/lib/storage';
 import { Card } from '../common';
+import {ExpenseBreakdownChart} from '.';
 
 interface ExpenseBreakdownInputProps {
   summary: MonthSummary;
@@ -85,11 +86,12 @@ const ExpenseBreakdownInput = ({
   };
 
   return (
-    <Card
-      title='소비 구조 비율'
-      description='이번 달 소비 구조를 입력해주세요. 합계는 100%가 되어야 합니다.'
-    >
-      <div className='space-y-4'>
+    <div className='space-y-6'>
+      <Card
+        title='소비 구조 비율'
+        description='이번 달 소비 구조를 입력해주세요. 합계는 100%가 되어야 합니다.'
+      >
+        <div className='space-y-4'>
         <div className='grid grid-cols-1 gap-4 sm:grid-cols-2'>
           <label className='flex flex-col gap-2'>
             <span className='text-sm font-medium text-slate-800 dark:text-slate-200'>
@@ -208,15 +210,25 @@ const ExpenseBreakdownInput = ({
           </div>
         )}
 
-        <button
-          onClick={handleSave}
-          disabled={isSaving || total !== 100}
-          className='w-full rounded-xl bg-primary-600 px-4 py-3 text-base font-medium text-white transition hover:bg-primary-700 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-primary-500 dark:hover:bg-primary-600'
-        >
-          {isSaving ? '저장 중...' : '저장하기'}
-        </button>
-      </div>
-    </Card>
+          <button
+            onClick={handleSave}
+            disabled={isSaving || total !== 100}
+            className='w-full rounded-xl bg-primary-600 px-4 py-3 text-base font-medium text-white transition hover:bg-primary-700 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-primary-500 dark:hover:bg-primary-600'
+          >
+            {isSaving ? '저장 중...' : '저장하기'}
+          </button>
+        </div>
+      </Card>
+
+      {total === 100 && (
+        <ExpenseBreakdownChart
+          fixed={fixed}
+          variable={variable}
+          saving={saving}
+          investment={investment}
+        />
+      )}
+    </div>
   );
 };
 
